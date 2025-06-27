@@ -1,6 +1,6 @@
 # ProgramaticPuppet
 
-ProgramaticPuppet is an experimental WYSIWYG interface for creating and running PuppetCore automations without writing code.
+ProgramaticPuppet is an experimental WYSIWYG interface for creating and running [PuppetCore](https://github.com/alfe-ai/PuppetCore) automations without writing code.
 
 It starts a small Express web server that serves a simple editor.  The editor lets you add numbered steps such as "Load URL", "loadPrintifyProductURL", "Click", "ClickNth", "ClickText", "ClickTextCheckbox", "ClickName", "Type", "Wait", "Check Page Url", "Section Title", "Scroll Bottom", "MouseClickCoordinates" or "Screenshot".  You can then run the defined steps directly from the browser.
 
