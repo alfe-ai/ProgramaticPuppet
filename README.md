@@ -2,7 +2,7 @@
 
 ProgramaticPuppet is an experimental WYSIWYG interface for creating and running [PuppetCore](https://github.com/alfe-ai/PuppetCore) automations without writing code.
 
-It starts a small Express web server that serves a simple editor.  The editor lets you add numbered steps such as "Load URL", "loadPrintifyProductURL", "Click", "ClickNth", "ClickText", "ClickTextCheckbox", "ClickName", "Type", "Wait", "Check Page Url", "Section Title", "Scroll Bottom", "MouseClickCoordinates" or "Screenshot".  You can then run the defined steps directly from the browser.
+It starts a small Express web server that serves a simple editor.  The editor lets you add numbered steps such as "Load URL", "Click", "ClickNth", "ClickText", "ClickTextCheckbox", "ClickName", "Type", "Wait", "Check Page Url", "Section Title", "Scroll Bottom", "MouseClickCoordinates" or "Screenshot".  You can then run the defined steps directly from the browser.
 
 This is only a minimal prototype, but it demonstrates how a no‑code interface can generate and execute puppet flows.
 
@@ -83,9 +83,11 @@ still run.
 Each puppet has a "Close browser" checkbox in the sidebar. When enabled the
 browser will automatically close once all steps finish running.
 
+<!--
 Each puppet also stores a **printifyProductURL** value. Set this URL in the text
 field above the loop options. The new `loadPrintifyProductURL` step uses this
 value to navigate directly to the configured product page.
+-->
 
 The main editor also includes a **Loop** option. Enable it and specify a count
 to automatically repeat the entire puppet that many times. When "Close browser"
