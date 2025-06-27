@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ProgramaticPuppet</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 0; }
+    #container { display: flex; max-width: 800px; margin: auto; }
+    #sidebar { width: 150px; border-right: 1px solid #ccc; padding: 8px; }
+    #main { flex: 1; padding: 8px; }
+    .tab { padding: 4px; cursor: pointer; border-bottom: 1px solid #ddd; }
+    .tab input { margin-right: 4px; }
+    .tab.active { background: #eee; font-weight: bold; }
+    .step { margin-bottom: 8px; border: 1px solid #ccc; padding: 8px; cursor: move; }
+    .step.drag-over { border-color: #000; }
+    .step button { margin-left: 4px; }
+    .step-number { margin-right: 4px; font-weight: bold; cursor: move; }
+  </style>
+</head>
+<body>
+<h1>ProgramaticPuppet</h1>
+<div id="container">
+  <div id="sidebar">
+    <div id="puppetList"></div>
+    <button onclick="addPuppet()">Add Puppet</button>
+    <button onclick="renamePuppet()">Rename Puppet</button>
+    <button onclick="saveCurrentPuppet()">Save Puppet</button>
+    <textarea id="configJson" rows="4" style="width:100%; margin-top:8px;"></textarea>
+    <button onclick="exportJSON()">Export JSON</button>
+    <button onclick="importJSON()">Import JSON</button>
+  </div>
+  <div id="main">
+    <div id="steps"></div>
+    <button onclick="addStep()">Add Step</button>
+    <div style="margin-top:8px;">
+      <input type="text" id="printifyProductURL" placeholder="Printify Product URL" style="width:100%;" />
+    </div>
+    <div style="margin-top:8px;">
+      <label><input type="checkbox" id="loopEnabled"> Loop</label>
+      <input type="number" id="loopCount" value="1" min="1" style="width:60px;" />
+    </div>
+    <button onclick="runSteps()">Run Steps</button>
+    <div id="status" style="margin-top:8px;color:green;"></div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
