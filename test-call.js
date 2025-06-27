@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 (async () => {
-  const base = 'http://localhost:3000';
+  const base = 'https://localhost:3005';
   const listRes = await fetch(base + '/getPuppets');
   const names = await listRes.json();
   console.log('Available puppets:', names);

@@ -5,6 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
+const https = require('https');
 const puppeteerSetup = require('puppetcore/config/puppeteerSetup');
 const {
   sleep_helper,
@@ -312,6 +313,11 @@ app.post('/runPuppet', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`[ProgramaticPuppet] Server running on http://localhost:${PORT}`);
+const httpsOptions = {
+  key: fs.readFileSync(path.join(__dirname, 'server.key')),
+  cert: fs.readFileSync(path.join(__dirname, 'server.cert')),
+};
+
+https.createServer(httpsOptions, app).listen(PORT, () => {
+  console.log(`[ProgramaticPuppet] Server running on https://localhost:${PORT}`);
 });

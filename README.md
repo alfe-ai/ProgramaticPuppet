@@ -16,7 +16,10 @@ chmod +x run.sh
 ./run.sh
 ```
 
-Open [http://localhost:3005](http://localhost:3005) in your browser and build a small script.  Press **Run Steps** to execute the flow with PuppetCore.
+Sample self-signed certificates `server.key` and `server.cert` are included for
+local HTTPS development.
+
+Open [https://localhost:3005](https://localhost:3005) in your browser and build a small script.  Press **Run Steps** to execute the flow with PuppetCore.
 
 For **click** and **type** steps, provide a CSS selector for the target element.
 Type steps insert each character with a 0.5 s delay to better mimic human input.
