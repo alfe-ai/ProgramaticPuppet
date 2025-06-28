@@ -86,6 +86,10 @@ still run.
 Each puppet has a "Close browser" checkbox in the sidebar. When enabled the
 browser will automatically close once all steps finish running.
 
+ProgramaticPuppet now reuses a single Puppeteer session so you remain logged in
+between runs. If you need to start over with a fresh session send a POST request
+to the `/resetBrowser` endpoint.
+
 <!--
 Each puppet also stores a **printifyProductURL** value. Set this URL in the text
 field above the loop options. The new `loadPrintifyProductURL` step uses this

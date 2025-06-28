@@ -134,3 +134,17 @@ paths:
                 properties:
                   error:
                     type: string
+  /resetBrowser:
+    post:
+      summary: Close and reset the persistent browser session
+      responses:
+        '200':
+          description: Browser instance closed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: closed
