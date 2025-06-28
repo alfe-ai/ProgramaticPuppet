@@ -17,6 +17,17 @@ const {
   setGlobalPage,
 } = require('puppetcore/flow/puppet_helpers');
 
+let persistentPage = null;
+
+async function getPersistentPage() {
+  if (persistentPage && !persistentPage.isClosed()) {
+    return persistentPage;
+  }
+  persistentPage = await puppeteerSetup();
+  setGlobalPage(persistentPage);
+  return persistentPage;
+}
+
 const DESCRIPTION_HTML = '<p><strong>Unisex Heavy Cotton Tee</strong></p> <p>Made with medium fabric (5.3 oz/yd&sup2; (180 g/m&sup2;)) consisting of 100% cotton for year-round comfort that is sustainable and highly durable. The classic fit of this shirt ensures a comfy, relaxed wear.</p> <p>Made using 100% US cotton that is ethically grown and harvested.</p> <p><strong>Size Table</strong><br />Size S: Width: 18.00 in, Length: 28.00 in, Sleeve length: 15.10 in, Size tolerance: 1.50 in<br />Size M: Width: 20.00 in, Length: 29.00 in, Sleeve length: 16.50 in, Size tolerance: 1.50 in<br />Size L: Width: 22.00 in, Length: 30.00 in, Sleeve length: 18.00 in, Size tolerance: 1.50 in<br />Size XL: Width: 24.00 in, Length: 31.00 in, Sleeve length: 19.50 in, Size tolerance: 1.50 in<br />Size 2XL: Width: 26.00 in, Length: 32.00 in, Sleeve length: 21.00 in, Size tolerance: 1.50 in<br />Size 3XL: Width: 28.00 in, Length: 33.00 in, Sleeve length: 22.40 in, Size tolerance: 1.50 in<br />Size 4XL: Width: 30.00 in, Length: 34.00 in, Sleeve length: 23.70 in, Size tolerance: 1.50 in<br />Size 5XL: Width: 32.00 in, Length: 35.00 in, Sleeve length: 25.00 in, Size tolerance: 1.50 in</p>';
 
 function htmlToSelector(html) {
@@ -78,7 +89,7 @@ async function runSteps(opts, logger = console.log) {
   let finishedEarly = false;
   for (let run = 0; run < loops; run++) {
     finishedEarly = false;
-    page = await puppeteerSetup();
+    page = await getPersistentPage();
     setGlobalPage(page);
 
     for (let i = 0; i < steps.length; ) {
@@ -230,6 +241,7 @@ async function runSteps(opts, logger = console.log) {
       } catch (e) {
         logger('Error closing browser:' + e);
       }
+      persistentPage = null;
     }
   }
 }
@@ -310,6 +322,21 @@ app.post('/runPuppet', async (req, res) => {
     res.end();
   } catch (err) {
     res.status(500).json({ error: String(err) });
+  }
+});
+
+app.post('/resetBrowser', async (req, res) => {
+  if (persistentPage) {
+    try {
+      await persistentPage.browser().close();
+      res.json({ status: 'closed' });
+    } catch (err) {
+      res.status(500).json({ error: String(err) });
+    } finally {
+      persistentPage = null;
+    }
+  } else {
+    res.json({ status: 'closed' });
   }
 });
 
