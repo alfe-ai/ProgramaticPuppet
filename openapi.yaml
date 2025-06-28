@@ -1,0 +1,136 @@
+openapi: 3.0.0
+info:
+  title: ProgramaticPuppet API
+  version: 1.0.0
+  description: |
+    HTTP API for running and managing ProgramaticPuppet automation scripts.
+servers:
+  - url: https://localhost:3005
+paths:
+  /run:
+    post:
+      summary: Execute a list of steps
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - type: array
+                  items:
+                    type: object
+                    description: Arbitrary step objects for runSteps
+                - type: object
+                  properties:
+                    steps:
+                      type: array
+                      items:
+                        type: object
+                        description: Arbitrary step objects for runSteps
+                    closeBrowser:
+                      type: boolean
+                    loops:
+                      type: integer
+                      minimum: 1
+                    printifyProductURL:
+                      type: string
+              description: |
+                Either an array of step objects or an object with a `steps` array
+                and optional options.
+      responses:
+        '200':
+          description: Execution started successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: done
+        '500':
+          description: Error while running steps
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /getPuppets:
+    get:
+      summary: List available puppet names
+      responses:
+        '200':
+          description: List of puppet identifiers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '500':
+          description: Unable to read export.json
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /runPuppet:
+    post:
+      summary: Run a stored puppet by name
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                puppetName:
+                  type: string
+                printifyProductURL:
+                  type: string
+                  description: Optional override for the product URL
+                loops:
+                  type: integer
+                  minimum: 1
+                  description: Optional override for loop count
+      responses:
+        '200':
+          description: Stream of execution logs as Server-Sent Events
+          content:
+            text/event-stream:
+              schema:
+                type: string
+                example: |
+                  data: [ProgramaticPuppet] Executing step 1/3
+
+        '400':
+          description: Required parameters missing
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '404':
+          description: Puppet not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
