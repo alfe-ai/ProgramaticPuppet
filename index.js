@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
 const https = require('https');
+const { execSync } = require('child_process');
 const puppeteerSetup = require('puppetcore/config/puppeteerSetup');
 const {
   sleep_helper,
@@ -18,6 +19,22 @@ const {
 } = require('puppetcore/flow/puppet_helpers');
 
 let persistentPage = null;
+
+function killChromium() {
+  const cmds = [
+    'pkill -9 -f chromium || true',
+    'pkill -9 -f chrome || true',
+    'pkill -9 -f chromium-browser || true',
+  ];
+  for (const cmd of cmds) {
+    try {
+      execSync(cmd, { stdio: 'ignore' });
+    } catch {
+      /* ignore errors */
+    }
+  }
+  persistentPage = null;
+}
 
 async function getPersistentPage() {
   if (persistentPage && !persistentPage.isClosed()) {
@@ -78,6 +95,8 @@ function htmlToSelector(html) {
 
 async function runSteps(opts, logger = console.log) {
   let { steps = [], closeBrowser = false, loops = 1, printifyProductURL = '' } = opts || {};
+
+  killChromium();
 
   logger('[ProgramaticPuppet] closeBrowser:', closeBrowser);
   logger('[ProgramaticPuppet] loops:', loops);
