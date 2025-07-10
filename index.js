@@ -270,6 +270,16 @@ async function runSteps(opts, logger = console.log) {
           const data = await res.json();
           logger(`[ProgramaticPuppet] Uploaded ${img}: ${JSON.stringify(data)}`);
         }
+      } else if (type === 'uiUploadFile') {
+        const imagePaths = String(step.paths || '')
+          .split(',')
+          .map(s => s.trim())
+          .filter(Boolean);
+        const selector = step.selector || 'input[type="file"]';
+        await page.setInputFiles(selector, imagePaths);
+        logger(
+          `[ProgramaticPuppet] Uploaded via UI: ${imagePaths.join(', ')}`,
+        );
       } else if (type === 'type') {
         let textToType = step.text || '';
         let selector = step.selector || '';
