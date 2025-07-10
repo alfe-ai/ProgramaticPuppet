@@ -199,6 +199,12 @@ async function runSteps(opts, logger = console.log) {
           .map(s => s.trim())
           .filter(Boolean);
         const itemId = step.itemId || '';
+        await page
+          .waitForFunction(
+            () => window.$fehelix_C?.model?.epsData && (window.$fehelix_C?.csrf || window.$fehelix_C?.csrfTokenMap),
+            { timeout: 15000 }
+          )
+          .catch(() => {});
         const epsData = await page.evaluate(() => window.$fehelix_C?.model?.epsData);
         const csrfMap = await page.evaluate(() => window.$fehelix_C?.csrf || window.$fehelix_C?.csrfTokenMap);
         let csrfToken = null;
