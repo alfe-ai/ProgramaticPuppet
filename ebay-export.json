@@ -1,0 +1,18 @@
+{
+  "ebayLocalListing": {
+    "steps": [
+      {
+        "type": "loadURL",
+        "url": "https://www.ebay.com/sh/ovw"
+      },
+      {
+        "type": "wait",
+        "seconds": "3000"
+      }
+    ],
+    "closeBrowser": false,
+    "loopEnabled": false,
+    "loopCount": 1,
+    "printifyProductURL": ""
+  }
+}
