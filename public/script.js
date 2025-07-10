@@ -25,6 +25,7 @@ const stepTypes = [
   'selectAllText',
   'keyPress',
   'tabNTimes',
+  'ebayUploadImage',
   'end'
 ];
 let dragSource = null;
@@ -189,6 +190,19 @@ function addFields(div, step = {}) {
     if (step.times) timesInput.value = step.times;
     timesInput.style.width = '60px';
     div.appendChild(timesInput);
+  } else if (step.type === 'ebayUploadImage') {
+    const pathsInput = document.createElement('input');
+    pathsInput.placeholder = 'image paths';
+    pathsInput.className = 'image-paths';
+    if (step.paths) pathsInput.value = step.paths;
+    div.appendChild(pathsInput);
+
+    const itemInput = document.createElement('input');
+    itemInput.placeholder = 'item id';
+    itemInput.className = 'image-item-id';
+    if (step.itemId) itemInput.value = step.itemId;
+    itemInput.style.width = '120px';
+    div.appendChild(itemInput);
   } else if (step.type === 'end' || step.type === 'scrollBottom' || step.type === 'selectAllText' || step.type === 'loadPrintifyProductURL') {
     // no additional fields
   } else {
@@ -297,6 +311,10 @@ function collectSteps() {
   } else if (type === 'tabNTimes') {
     const count = Number(div.querySelector('.tab-times')?.value || 1);
     result.push({ type, times: count });
+  } else if (type === 'ebayUploadImage') {
+    const paths = div.querySelector('.image-paths')?.value || '';
+    const itemId = div.querySelector('.image-item-id')?.value || '';
+    result.push({ type, paths, itemId });
   } else {
       const val = div.querySelector('input')?.value || '';
       if (type === 'loadURL') result.push({ type, url: val });

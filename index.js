@@ -193,6 +193,50 @@ async function runSteps(opts, logger = console.log) {
           await page.keyboard.press('Tab');
           await sleep_helper(0.1);
         }
+      } else if (type === 'ebayUploadImage') {
+        const imagePaths = String(step.paths || '')
+          .split(',')
+          .map(s => s.trim())
+          .filter(Boolean);
+        const itemId = step.itemId || '';
+        const epsData = await page.evaluate(() => window.$fehelix_C?.model?.epsData);
+        const csrfMap = await page.evaluate(() => window.$fehelix_C?.csrf || window.$fehelix_C?.csrfTokenMap);
+        let csrfToken = null;
+        if (csrfMap) {
+          for (const key of Object.keys(csrfMap)) {
+            if (key.includes('EpsBasic')) {
+              csrfToken = csrfMap[key];
+              break;
+            }
+          }
+        }
+        if (!epsData?.endpoint || !csrfToken) {
+          throw new Error('EPS info missing');
+        }
+        const cookieHeader = (await page.cookies())
+          .map(c => `${c.name}=${c.value}`)
+          .join('; ');
+        const srtRes = await fetch('https://www.ebay.com/lstng/gql?dummy=1', {
+          headers: { Cookie: cookieHeader },
+        });
+        const srtToken = srtRes.headers.get('x-ebay-c-csrf-token');
+        const uploadUrl = `${epsData.endpoint}?srt=${srtToken}`;
+        for (const img of imagePaths) {
+          const form = new FormData();
+          form.append('item_id', itemId);
+          form.append('picture', fs.createReadStream(img));
+          const res = await fetch(uploadUrl, {
+            method: 'POST',
+            headers: {
+              Cookie: cookieHeader,
+              'x-csrf-token': csrfToken,
+              Accept: 'application/json',
+            },
+            body: form,
+          });
+          const data = await res.json();
+          logger(`[ProgramaticPuppet] Uploaded ${img}: ${JSON.stringify(data)}`);
+        }
       } else if (type === 'type') {
         let textToType = step.text || '';
         let selector = step.selector || '';
