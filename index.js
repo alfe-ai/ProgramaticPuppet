@@ -199,8 +199,41 @@ async function runSteps(opts, logger = console.log) {
           .map(s => s.trim())
           .filter(Boolean);
         const itemId = step.itemId || '';
-        const epsData = await page.evaluate(() => window.$fehelix_C?.model?.epsData);
-        const csrfMap = await page.evaluate(() => window.$fehelix_C?.csrf || window.$fehelix_C?.csrfTokenMap);
+        const { epsData, csrfMap } = await page.evaluate(() => {
+          function extract(obj) {
+            if (!obj || typeof obj !== 'object') return { epsData: null, csrfMap: null };
+            return {
+              epsData: obj.model?.epsData || null,
+              csrfMap: obj.csrf || obj.csrfTokenMap || null,
+            };
+          }
+
+          const tried = new Set();
+          const merge = (a, b) => ({
+            epsData: a.epsData || b.epsData,
+            csrfMap: a.csrfMap || b.csrfMap,
+          });
+
+          let result = { epsData: null, csrfMap: null };
+          const tryObj = obj => {
+            if (!obj || tried.has(obj)) return;
+            tried.add(obj);
+            result = merge(result, extract(obj));
+          };
+
+          // Common known globals
+          tryObj(window.$fehelix_C);
+          tryObj(window.__FEHelix_C);
+
+          // Fallback: scan other window properties
+          for (const key of Object.keys(window)) {
+            if (result.epsData && result.csrfMap) break;
+            try {
+              tryObj(window[key]);
+            } catch {}
+          }
+          return result;
+        });
         let csrfToken = null;
         if (csrfMap) {
           for (const key of Object.keys(csrfMap)) {

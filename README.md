@@ -82,7 +82,9 @@ The **keyPress** step presses the provided keyboard key. Key names are case-inse
 The **ebayUploadImage** step uploads one or more images to the currently open eBay
 listing page. Provide a comma‑separated list of file paths and optionally an item
 ID. The step pulls the EPS endpoint and CSRF token from the page, fetches a fresh
-`SRT` token and then posts each image using `multipart/form-data`.
+`SRT` token and then posts each image using `multipart/form-data`. If the standard
+variables are not present the code now scans other globals on the page looking for
+the required data, making it more resilient to eBay layout changes.
 
 The **end** step stops execution of the current puppet instance immediately,
 skipping any remaining steps. When loops are enabled, later iterations will
