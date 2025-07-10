@@ -86,6 +86,12 @@ ID. The step pulls the EPS endpoint and CSRF token from the page, fetches a fres
 variables are not present the code now scans other globals on the page looking for
 the required data, making it more resilient to eBay layout changes.
 
+The **uiUploadFile** step interacts with a standard file input on the current
+page. Provide a comma-separated list of file paths and optionally a CSS selector
+for the input element. When no selector is given the first `input[type="file"]`
+is used. This lets you trigger uploads purely through the website's UI without
+relying on eBay's internal EPS variables.
+
 The **end** step stops execution of the current puppet instance immediately,
 skipping any remaining steps. When loops are enabled, later iterations will
 still run.

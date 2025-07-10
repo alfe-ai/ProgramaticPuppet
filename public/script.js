@@ -26,6 +26,7 @@ const stepTypes = [
   'keyPress',
   'tabNTimes',
   'ebayUploadImage',
+  'uiUploadFile',
   'end'
 ];
 let dragSource = null;
@@ -203,6 +204,19 @@ function addFields(div, step = {}) {
     if (step.itemId) itemInput.value = step.itemId;
     itemInput.style.width = '120px';
     div.appendChild(itemInput);
+  } else if (step.type === 'uiUploadFile') {
+    const pathsInput = document.createElement('input');
+    pathsInput.placeholder = 'file paths';
+    pathsInput.className = 'file-paths';
+    if (step.paths) pathsInput.value = step.paths;
+    div.appendChild(pathsInput);
+
+    const selInput = document.createElement('input');
+    selInput.placeholder = 'input selector';
+    selInput.className = 'file-selector';
+    if (step.selector) selInput.value = step.selector;
+    selInput.style.width = '120px';
+    div.appendChild(selInput);
   } else if (step.type === 'end' || step.type === 'scrollBottom' || step.type === 'selectAllText' || step.type === 'loadPrintifyProductURL') {
     // no additional fields
   } else {
@@ -315,6 +329,10 @@ function collectSteps() {
     const paths = div.querySelector('.image-paths')?.value || '';
     const itemId = div.querySelector('.image-item-id')?.value || '';
     result.push({ type, paths, itemId });
+  } else if (type === 'uiUploadFile') {
+    const paths = div.querySelector('.file-paths')?.value || '';
+    const selector = div.querySelector('.file-selector')?.value || '';
+    result.push({ type, paths, selector });
   } else {
       const val = div.querySelector('input')?.value || '';
       if (type === 'loadURL') result.push({ type, url: val });
