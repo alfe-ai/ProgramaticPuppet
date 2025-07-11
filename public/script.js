@@ -26,6 +26,7 @@ const stepTypes = [
   'selectAllText',
   'keyPress',
   'tabNTimes',
+  'ebayListingTitle',
   'ebayUploadImage',
   'uiUploadFile',
   'setVariable',
@@ -229,6 +230,12 @@ function addFields(div, step = {}) {
     if (step.times) timesInput.value = step.times;
     timesInput.style.width = '60px';
     div.appendChild(timesInput);
+  } else if (step.type === 'ebayListingTitle') {
+    const imgInput = document.createElement('input');
+    imgInput.placeholder = 'image path';
+    imgInput.className = 'ebay-title-image';
+    if (step.image) imgInput.value = step.image;
+    div.appendChild(imgInput);
   } else if (step.type === 'ebayUploadImage') {
     const pathsInput = document.createElement('input');
     pathsInput.placeholder = 'image paths';
@@ -376,6 +383,9 @@ function collectSteps() {
   } else if (type === 'tabNTimes') {
     const count = Number(div.querySelector('.tab-times')?.value || 1);
     result.push({ type, times: count });
+  } else if (type === 'ebayListingTitle') {
+    const image = div.querySelector('.ebay-title-image')?.value || '';
+    result.push({ type, image });
   } else if (type === 'ebayUploadImage') {
     const paths = div.querySelector('.image-paths')?.value || '';
     const itemId = div.querySelector('.image-item-id')?.value || '';

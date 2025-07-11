@@ -202,6 +202,51 @@ async function runSteps(opts, logger = console.log) {
           await page.keyboard.press('Tab');
           await sleep_helper(0.1);
         }
+      } else if (type === 'ebayListingTitle') {
+        const imagePath = step.image;
+        if (!process.env.OPENAI_API_KEY) {
+          logger('[ProgramaticPuppet] OPENAI_API_KEY not set');
+        } else if (imagePath && fs.existsSync(imagePath)) {
+          try {
+            const data = fs.readFileSync(imagePath);
+            const base64 = data.toString('base64');
+            const payload = {
+              model: 'gpt-4o-mini',
+              messages: [
+                {
+                  role: 'user',
+                  content: [
+                    {
+                      type: 'image_url',
+                      image_url: { url: `data:image/jpeg;base64,${base64}` },
+                    },
+                    {
+                      type: 'text',
+                      text: 'Generate a short eBay listing title for this product.',
+                    },
+                  ],
+                },
+              ],
+              max_tokens: 30,
+            };
+            const res = await fetch('https://api.openai.com/v1/chat/completions', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+              },
+              body: JSON.stringify(payload),
+            });
+            const json = await res.json();
+            const title = json.choices?.[0]?.message?.content?.trim() || '';
+            variables.ebayTitle = title;
+            logger(`[ProgramaticPuppet] ebayTitle: ${title}`);
+          } catch (err) {
+            logger(`[ProgramaticPuppet] ebayListingTitle error: ${err}`);
+          }
+        } else {
+          logger('[ProgramaticPuppet] image path invalid');
+        }
       } else if (type === 'ebayUploadImage') {
         const imagePaths = String(step.paths || '')
           .split(',')

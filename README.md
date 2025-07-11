@@ -79,6 +79,11 @@ The **keyPress** step presses the provided keyboard key. Key names are case-inse
   times. Enter the repeat count in the second field of the UI. Each Tab press is
   followed by a 0.1 second pause.
 
+The **ebayListingTitle** step sends an image to the GPT‑4o‑mini vision API to
+generate an eBay listing title. Provide the local file path to the image. The
+resulting title is stored in the `ebayTitle` variable. Set your OpenAI API key
+in the `OPENAI_API_KEY` environment variable before running this step.
+
 The **ebayUploadImage** step uploads one or more images to the currently open eBay
 listing page. Provide a comma‑separated list of file paths and optionally an item
 ID. The step pulls the EPS endpoint and CSRF token from the page, fetches a fresh
