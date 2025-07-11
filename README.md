@@ -81,8 +81,10 @@ The **keyPress** step presses the provided keyboard key. Key names are case-inse
 
 The **ebayListingTitle** step sends an image to the GPT‑4o‑mini vision API to
 generate an eBay listing title. Provide the local file path to the image. The
-resulting title is stored in the `ebayTitle` variable. Set your OpenAI API key
-in the `OPENAI_API_KEY` environment variable before running this step.
+resulting title is stored in the `ebayTitle` variable. When this step is added
+to a puppet the editor now automatically creates an `ebayTitle` entry in the
+Variables panel if one is not already present. Set your OpenAI API key in the
+`OPENAI_API_KEY` environment variable before running this step.
 
 The **ebayUploadImage** step uploads one or more images to the currently open eBay
 listing page. Provide a comma‑separated list of file paths and optionally an item

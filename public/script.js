@@ -90,6 +90,15 @@ function addVariableField(name = '', value = '') {
   variablesList.appendChild(row);
 }
 
+function ensureEbayTitleVariable() {
+  const hasVar = Array.from(
+    variablesList.querySelectorAll('.var-row-name'),
+  ).some(input => input.value === 'ebayTitle');
+  if (!hasVar) {
+    addVariableField('ebayTitle', '');
+  }
+}
+
 function loadVariables(vars = {}) {
   variablesList.innerHTML = '';
   Object.keys(vars).forEach(k => addVariableField(k, vars[k]));
@@ -236,6 +245,7 @@ function addFields(div, step = {}) {
     imgInput.className = 'ebay-title-image';
     if (step.image) imgInput.value = step.image;
     div.appendChild(imgInput);
+    ensureEbayTitleVariable();
   } else if (step.type === 'ebayUploadImage') {
     const pathsInput = document.createElement('input');
     pathsInput.placeholder = 'image paths';
@@ -320,6 +330,9 @@ function addStep(step = {}) {
     // remove existing inputs
     Array.from(div.querySelectorAll('input')).forEach(el => el.remove());
     addFields(div, { type: select.value });
+    if (select.value === 'ebayListingTitle') {
+      ensureEbayTitleVariable();
+    }
   });
   div.appendChild(select);
   addFields(div, step);
