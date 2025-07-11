@@ -276,7 +276,15 @@ async function runSteps(opts, logger = console.log) {
           .map(s => s.trim())
           .filter(Boolean);
         const selector = step.selector || 'input[type="file"]';
-        await page.setInputFiles(selector, imagePaths);
+        if (typeof page.setInputFiles === 'function') {
+          await page.setInputFiles(selector, imagePaths);
+        } else {
+          const handle = await page.$(selector);
+          if (!handle) {
+            throw new Error(`File input not found for selector: ${selector}`);
+          }
+          await handle.uploadFile(...imagePaths);
+        }
         logger(
           `[ProgramaticPuppet] Uploaded via UI: ${imagePaths.join(', ')}`,
         );
