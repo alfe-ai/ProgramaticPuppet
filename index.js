@@ -94,7 +94,7 @@ function htmlToSelector(html) {
 }
 
 async function runSteps(opts, logger = console.log) {
-  let { steps = [], closeBrowser = false, loops = 1, printifyProductURL = '' } = opts || {};
+  let { steps = [], closeBrowser = false, loops = 1, variables = {}, printifyProductURL = '' } = opts || {};
 
   killChromium();
 
@@ -103,6 +103,7 @@ async function runSteps(opts, logger = console.log) {
   if (printifyProductURL) {
     logger('[ProgramaticPuppet] printifyProductURL:', printifyProductURL);
   }
+  logger('[ProgramaticPuppet] variables:', JSON.stringify(variables));
 
   let page;
   let finishedEarly = false;
@@ -112,7 +113,15 @@ async function runSteps(opts, logger = console.log) {
     setGlobalPage(page);
 
     for (let i = 0; i < steps.length; ) {
-      const step = steps[i];
+      const rawStep = steps[i];
+      const step = {};
+      for (const [k, v] of Object.entries(rawStep)) {
+        if (typeof v === 'string') {
+          step[k] = v.replace(/\{\{([^}]+)\}\}/g, (_, n) => (n in variables ? variables[n] : ''));
+        } else {
+          step[k] = v;
+        }
+      }
       logger(`[ProgramaticPuppet] Executing step ${i + 1}/${steps.length}:`, step);
       const type = step.type;
       let jumped = false;
@@ -288,6 +297,11 @@ async function runSteps(opts, logger = console.log) {
         logger(
           `[ProgramaticPuppet] Uploaded via UI: ${imagePaths.join(', ')}`,
         );
+      } else if (type === 'setVariable') {
+        if (step.name) {
+          variables[step.name] = step.value || '';
+          logger(`[ProgramaticPuppet] Variable ${step.name} set`);
+        }
       } else if (type === 'type') {
         let textToType = step.text || '';
         let selector = step.selector || '';
@@ -371,6 +385,7 @@ app.post('/run', async (req, res) => {
   let closeBrowser = false;
   let loops = 1;
   let printifyProductURL = '';
+  let variables = {};
   if (Array.isArray(req.body)) {
     steps = req.body;
   } else if (req.body && Array.isArray(req.body.steps)) {
@@ -378,10 +393,11 @@ app.post('/run', async (req, res) => {
     closeBrowser = !!req.body.closeBrowser;
     loops = Number(req.body.loops) || 1;
     printifyProductURL = req.body.printifyProductURL || '';
+    variables = req.body.variables || {};
   }
   console.log('[ProgramaticPuppet] Received steps:', JSON.stringify(steps));
   try {
-    await runSteps({ steps, closeBrowser, loops, printifyProductURL });
+    await runSteps({ steps, closeBrowser, loops, printifyProductURL, variables });
     res.json({ status: 'done' });
   } catch (err) {
     console.error('Error while running steps:', err);
@@ -405,6 +421,7 @@ app.post('/runPuppet', async (req, res) => {
   }
   let printifyProductURL = req.body.printifyProductURL || '';
   let loopsOverride = req.body.loops;
+  let variablesOverride = req.body.variables || {};
   try {
     const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'export.json'), 'utf8'));
     const puppet = data[puppetName];
@@ -415,6 +432,7 @@ app.post('/runPuppet', async (req, res) => {
     const closeBrowser = !!puppet.closeBrowser;
     const loops = Number(loopsOverride) || (puppet.loopEnabled ? Number(puppet.loopCount) || 1 : 1);
     const finalURL = printifyProductURL || puppet.printifyProductURL || '';
+    const variables = { ...(puppet.variables || {}), ...variablesOverride };
 
     res.writeHead(200, {
       'Content-Type': 'text/event-stream',
@@ -428,7 +446,7 @@ app.post('/runPuppet', async (req, res) => {
     };
 
     try {
-      await runSteps({ steps, closeBrowser, loops, printifyProductURL: finalURL }, logger);
+      await runSteps({ steps, closeBrowser, loops, printifyProductURL: finalURL, variables }, logger);
       res.write('data: done\n\n');
     } catch (err) {
       res.write(`data: error: ${err}\n\n`);

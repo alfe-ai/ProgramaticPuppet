@@ -4,6 +4,7 @@ const jsonArea = document.getElementById('configJson');
 const loopEnabledCheckbox = document.getElementById('loopEnabled');
 const loopCountInput = document.getElementById('loopCount');
 const printifyProductURLInput = document.getElementById('printifyProductURL');
+const variablesList = document.getElementById('variablesList');
 const stepTypes = [
   'loadURL',
   'loadPrintifyProductURL',
@@ -27,6 +28,7 @@ const stepTypes = [
   'tabNTimes',
   'ebayUploadImage',
   'uiUploadFile',
+  'setVariable',
   'end'
 ];
 let dragSource = null;
@@ -42,7 +44,8 @@ Object.keys(puppets).forEach(name => {
       closeBrowser: false,
       loopEnabled: false,
       loopCount: 1,
-      printifyProductURL: ''
+      printifyProductURL: '',
+      variables: {}
     };
   } else {
     puppets[name].steps = puppets[name].steps || [];
@@ -50,6 +53,7 @@ Object.keys(puppets).forEach(name => {
     puppets[name].loopEnabled = !!puppets[name].loopEnabled;
     puppets[name].loopCount = Number(puppets[name].loopCount) || 1;
     puppets[name].printifyProductURL = puppets[name].printifyProductURL || '';
+    puppets[name].variables = puppets[name].variables || {};
   }
 });
 
@@ -64,6 +68,40 @@ function renumberSteps() {
     }
     span.textContent = `${idx + 1}.`;
   });
+}
+
+function addVariableField(name = '', value = '') {
+  const row = document.createElement('div');
+  const nameInput = document.createElement('input');
+  nameInput.placeholder = 'name';
+  nameInput.className = 'var-row-name';
+  if (name) nameInput.value = name;
+  const valueInput = document.createElement('input');
+  valueInput.placeholder = 'value';
+  valueInput.className = 'var-row-value';
+  if (value) valueInput.value = value;
+  const delBtn = document.createElement('button');
+  delBtn.textContent = 'Delete';
+  delBtn.onclick = () => row.remove();
+  row.appendChild(nameInput);
+  row.appendChild(valueInput);
+  row.appendChild(delBtn);
+  variablesList.appendChild(row);
+}
+
+function loadVariables(vars = {}) {
+  variablesList.innerHTML = '';
+  Object.keys(vars).forEach(k => addVariableField(k, vars[k]));
+}
+
+function collectVariables() {
+  const vars = {};
+  variablesList.querySelectorAll('div').forEach(row => {
+    const name = row.querySelector('.var-row-name')?.value.trim();
+    const value = row.querySelector('.var-row-value')?.value || '';
+    if (name) vars[name] = value;
+  });
+  return vars;
 }
 
 function makeDraggable(div) {
@@ -217,6 +255,19 @@ function addFields(div, step = {}) {
     if (step.selector) selInput.value = step.selector;
     selInput.style.width = '120px';
     div.appendChild(selInput);
+  } else if (step.type === 'setVariable') {
+    const nameInput = document.createElement('input');
+    nameInput.placeholder = 'var name';
+    nameInput.className = 'set-var-name';
+    if (step.name) nameInput.value = step.name;
+    div.appendChild(nameInput);
+
+    const valInput = document.createElement('input');
+    valInput.placeholder = 'value';
+    valInput.className = 'set-var-value';
+    if (step.value) valInput.value = step.value;
+    valInput.style.marginLeft = '4px';
+    div.appendChild(valInput);
   } else if (step.type === 'end' || step.type === 'scrollBottom' || step.type === 'selectAllText' || step.type === 'loadPrintifyProductURL') {
     // no additional fields
   } else {
@@ -333,6 +384,10 @@ function collectSteps() {
     const paths = div.querySelector('.file-paths')?.value || '';
     const selector = div.querySelector('.file-selector')?.value || '';
     result.push({ type, paths, selector });
+  } else if (type === 'setVariable') {
+    const name = div.querySelector('.set-var-name')?.value || '';
+    const value = div.querySelector('.set-var-value')?.value || '';
+    result.push({ type, name, value });
   } else {
       const val = div.querySelector('input')?.value || '';
       if (type === 'loadURL') result.push({ type, url: val });
@@ -385,13 +440,14 @@ function switchPuppet(name) {
   if (loopEnabledCheckbox) loopEnabledCheckbox.checked = !!puppets[name].loopEnabled;
   if (loopCountInput) loopCountInput.value = puppets[name].loopCount || 1;
   if (printifyProductURLInput) printifyProductURLInput.value = puppets[name].printifyProductURL || '';
+  loadVariables(puppets[name].variables || {});
 }
 
 function addPuppet() {
   const name = prompt('Puppet name?');
   if (!name) return;
   if (!puppets[name]) {
-    puppets[name] = { steps: [], closeBrowser: false, loopEnabled: false, loopCount: 1, printifyProductURL: '' };
+    puppets[name] = { steps: [], closeBrowser: false, loopEnabled: false, loopCount: 1, printifyProductURL: '', variables: {} };
   }
   switchPuppet(name);
   savePuppets();
@@ -422,6 +478,7 @@ function saveCurrentPuppet() {
   puppets[currentPuppet].loopEnabled = loopEnabledCheckbox.checked;
   puppets[currentPuppet].loopCount = Number(loopCountInput.value) || 1;
   puppets[currentPuppet].printifyProductURL = printifyProductURLInput.value || '';
+  puppets[currentPuppet].variables = collectVariables();
   savePuppets();
   alert('Saved');
 }
@@ -438,7 +495,8 @@ async function runSteps() {
         steps,
         closeBrowser: puppets[currentPuppet].closeBrowser,
         loops: loopEnabledCheckbox.checked ? Number(loopCountInput.value) || 1 : 1,
-        printifyProductURL: puppets[currentPuppet].printifyProductURL || ''
+        printifyProductURL: puppets[currentPuppet].printifyProductURL || '',
+        variables: collectVariables()
       })
     });
     const data = await res.json();
@@ -465,6 +523,7 @@ function exportJSON() {
     sanitized[name].loopEnabled = !!sanitized[name].loopEnabled;
     sanitized[name].loopCount = Number(sanitized[name].loopCount) || 1;
     sanitized[name].printifyProductURL = sanitized[name].printifyProductURL || '';
+    sanitized[name].variables = sanitized[name].variables || {};
   });
   jsonArea.value = JSON.stringify(sanitized, null, 2);
 }
@@ -476,13 +535,14 @@ function importJSON() {
       puppets = obj;
       Object.keys(puppets).forEach(name => {
         if (Array.isArray(puppets[name])) {
-          puppets[name] = { steps: puppets[name], closeBrowser: false, loopEnabled: false, loopCount: 1, printifyProductURL: '' };
+          puppets[name] = { steps: puppets[name], closeBrowser: false, loopEnabled: false, loopCount: 1, printifyProductURL: '', variables: {} };
         } else {
           puppets[name].steps = puppets[name].steps || [];
           puppets[name].closeBrowser = !!puppets[name].closeBrowser;
           puppets[name].loopEnabled = !!puppets[name].loopEnabled;
           puppets[name].loopCount = Number(puppets[name].loopCount) || 1;
           puppets[name].printifyProductURL = puppets[name].printifyProductURL || '';
+          puppets[name].variables = puppets[name].variables || {};
         }
       });
       savePuppets();
@@ -496,6 +556,6 @@ function importJSON() {
 }
 
 if (Object.keys(puppets).length === 0) {
-  puppets['default'] = { steps: [], closeBrowser: false, loopEnabled: false, loopCount: 1, printifyProductURL: '' };
+  puppets['default'] = { steps: [], closeBrowser: false, loopEnabled: false, loopCount: 1, printifyProductURL: '', variables: {} };
 }
 switchPuppet(Object.keys(puppets)[0]);
