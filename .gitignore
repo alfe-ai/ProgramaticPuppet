@@ -2,3 +2,4 @@
 node_modules/
 ebay-export.json
 chrome-profile/
+.env
