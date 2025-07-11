@@ -127,4 +127,4 @@ The editor now includes a **Variables** panel for defining runtime variables.
 Each entry is a name/value pair that gets sent to the server when executing a
 puppet. The **setVariable** step can modify these values during a run and the
 new **typeVar** step types the value stored in the named variable into the
-currently focused field.
+currently focused field, automatically stripping any double quote (\") characters.

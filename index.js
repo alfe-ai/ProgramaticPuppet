@@ -349,7 +349,7 @@ async function runSteps(opts, logger = console.log) {
         }
       } else if (type === 'typeVar') {
         const name = step.name || '';
-        const textToType = String(variables[name] || '');
+        const textToType = String(variables[name] || '').replace(/"/g, '');
         const target = step.selector ? htmlToSelector(step.selector) : null;
         for (const ch of textToType) {
           if (target) {
