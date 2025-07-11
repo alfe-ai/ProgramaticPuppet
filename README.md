@@ -2,7 +2,7 @@
 
 ProgramaticPuppet is an experimental WYSIWYG interface for creating and running [PuppetCore](https://github.com/alfe-ai/PuppetCore) automations without writing code.
 
-It starts a small Express web server that serves a simple editor.  The editor lets you add numbered steps such as "Load URL", "Click", "ClickNth", "ClickText", "ClickTextCheckbox", "ClickName", "Type", "Wait", "Check Page Url", "Section Title", "Scroll Bottom", "MouseClickCoordinates" or "Screenshot".  You can then run the defined steps directly from the browser.
+It starts a small Express web server that serves a simple editor.  The editor lets you add numbered steps such as "Load URL", "Click", "ClickNth", "ClickText", "ClickTextCheckbox", "ClickName", "Type", "TypeVar", "Wait", "Check Page Url", "Section Title", "Scroll Bottom", "MouseClickCoordinates" or "Screenshot".  You can then run the defined steps directly from the browser.
 
 This is only a minimal prototype, but it demonstrates how a no‑code interface can generate and execute puppet flows.
 
@@ -125,4 +125,6 @@ currently selected puppet.
 
 The editor now includes a **Variables** panel for defining runtime variables.
 Each entry is a name/value pair that gets sent to the server when executing a
-puppet. The new **setVariable** step can modify these values during a run.
+puppet. The **setVariable** step can modify these values during a run and the
+new **typeVar** step types the value stored in the named variable into the
+currently focused field.

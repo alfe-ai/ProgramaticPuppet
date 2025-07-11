@@ -15,6 +15,7 @@ const stepTypes = [
   'clickNth',
   'clickNthName',
   'setDescription',
+  'typeVar',
   'type',
   'wait',
   'log',
@@ -272,6 +273,12 @@ function addFields(div, step = {}) {
     if (step.selector) selInput.value = step.selector;
     selInput.style.width = '120px';
     div.appendChild(selInput);
+  } else if (step.type === 'typeVar') {
+    const nameInput = document.createElement('input');
+    nameInput.placeholder = 'var name';
+    nameInput.className = 'type-var-name';
+    if (step.name) nameInput.value = step.name;
+    div.appendChild(nameInput);
   } else if (step.type === 'setVariable') {
     const nameInput = document.createElement('input');
     nameInput.placeholder = 'var name';
@@ -411,6 +418,9 @@ function collectSteps() {
     const name = div.querySelector('.set-var-name')?.value || '';
     const value = div.querySelector('.set-var-value')?.value || '';
     result.push({ type, name, value });
+  } else if (type === 'typeVar') {
+    const name = div.querySelector('.type-var-name')?.value || '';
+    result.push({ type, name });
   } else {
       const val = div.querySelector('input')?.value || '';
       if (type === 'loadURL') result.push({ type, url: val });

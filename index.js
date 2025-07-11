@@ -347,6 +347,18 @@ async function runSteps(opts, logger = console.log) {
           variables[step.name] = step.value || '';
           logger(`[ProgramaticPuppet] Variable ${step.name} set`);
         }
+      } else if (type === 'typeVar') {
+        const name = step.name || '';
+        const textToType = String(variables[name] || '');
+        const target = step.selector ? htmlToSelector(step.selector) : null;
+        for (const ch of textToType) {
+          if (target) {
+            await page.type(target, ch, { delay: 500 });
+          } else {
+            await page.keyboard.type(ch, { delay: 500 });
+          }
+          logger(`[ProgramaticPuppet] Typed letter from ${name}: ${ch}`);
+        }
       } else if (type === 'type') {
         let textToType = step.text || '';
         let selector = step.selector || '';
