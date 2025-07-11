@@ -251,6 +251,42 @@ async function runSteps(opts, logger = console.log) {
         } else {
           logger('[ProgramaticPuppet] image path invalid');
         }
+      } else if (type === 'ebayPrice') {
+        const listingTitle = variables.ebayTitle || '';
+        if (!process.env.OPENAI_API_KEY) {
+          logger('[ProgramaticPuppet] OPENAI_API_KEY not set');
+        } else if (!listingTitle) {
+          logger('[ProgramaticPuppet] ebayTitle variable not set');
+        } else {
+          try {
+            const prompt =
+              `price for ${listingTitle} and please give a final answer for suggested eBay price.` +
+              `\n\n---\n\nThe last line of your reply should be:` +
+              `\n\n"Ebay Suggested Price: $xx.xx"` +
+              `\n\nThe eBay price should be no less than $10.`;
+            const payload = {
+              model: 'gpt-4o-search-preview',
+              messages: [{ role: 'user', content: prompt }],
+              max_tokens: 60,
+            };
+            const res = await fetch('https://api.openai.com/v1/chat/completions', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+              },
+              body: JSON.stringify(payload),
+            });
+            const json = await res.json();
+            const content = json.choices?.[0]?.message?.content?.trim() || '';
+            const match = content.match(/Ebay Suggested Price: \$(\d+(?:\.\d{1,2})?)/i);
+            const price = match ? match[1] : content;
+            variables.ebayPrice = price;
+            logger(`[ProgramaticPuppet] ebayPrice: ${price}`);
+          } catch (err) {
+            logger(`[ProgramaticPuppet] ebayPrice error: ${err}`);
+          }
+        }
       } else if (type === 'ebayUploadImage') {
         const imagePaths = String(step.paths || '')
           .split(',')
