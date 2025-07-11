@@ -115,3 +115,7 @@ is checked the browser will be relaunched between each loop.
 
 Use the **Rename Puppet** button in the sidebar to change the name of the
 currently selected puppet.
+
+The editor now includes a **Variables** panel for defining runtime variables.
+Each entry is a name/value pair that gets sent to the server when executing a
+puppet. The new **setVariable** step can modify these values during a run.

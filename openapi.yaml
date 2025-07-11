@@ -34,6 +34,10 @@ paths:
                       minimum: 1
                     printifyProductURL:
                       type: string
+                    variables:
+                      type: object
+                      additionalProperties:
+                        type: string
               description: |
                 Either an array of step objects or an object with a `steps` array
                 and optional options.
@@ -97,6 +101,10 @@ paths:
                   type: integer
                   minimum: 1
                   description: Optional override for loop count
+                variables:
+                  type: object
+                  additionalProperties:
+                    type: string
       responses:
         '200':
           description: Stream of execution logs as Server-Sent Events
