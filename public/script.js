@@ -28,6 +28,7 @@ const stepTypes = [
   'keyPress',
   'tabNTimes',
   'ebayListingTitle',
+  'ebayPrice',
   'ebayUploadImage',
   'uiUploadFile',
   'setVariable',
@@ -97,6 +98,15 @@ function ensureEbayTitleVariable() {
   ).some(input => input.value === 'ebayTitle');
   if (!hasVar) {
     addVariableField('ebayTitle', '');
+  }
+}
+
+function ensureEbayPriceVariable() {
+  const hasVar = Array.from(
+    variablesList.querySelectorAll('.var-row-name'),
+  ).some(input => input.value === 'ebayPrice');
+  if (!hasVar) {
+    addVariableField('ebayPrice', '');
   }
 }
 
@@ -247,6 +257,9 @@ function addFields(div, step = {}) {
     if (step.image) imgInput.value = step.image;
     div.appendChild(imgInput);
     ensureEbayTitleVariable();
+  } else if (step.type === 'ebayPrice') {
+    ensureEbayTitleVariable();
+    ensureEbayPriceVariable();
   } else if (step.type === 'ebayUploadImage') {
     const pathsInput = document.createElement('input');
     pathsInput.placeholder = 'image paths';
@@ -339,6 +352,9 @@ function addStep(step = {}) {
     addFields(div, { type: select.value });
     if (select.value === 'ebayListingTitle') {
       ensureEbayTitleVariable();
+    } else if (select.value === 'ebayPrice') {
+      ensureEbayTitleVariable();
+      ensureEbayPriceVariable();
     }
   });
   div.appendChild(select);
@@ -406,6 +422,8 @@ function collectSteps() {
   } else if (type === 'ebayListingTitle') {
     const image = div.querySelector('.ebay-title-image')?.value || '';
     result.push({ type, image });
+  } else if (type === 'ebayPrice') {
+    result.push({ type });
   } else if (type === 'ebayUploadImage') {
     const paths = div.querySelector('.image-paths')?.value || '';
     const itemId = div.querySelector('.image-item-id')?.value || '';

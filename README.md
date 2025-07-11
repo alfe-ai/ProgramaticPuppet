@@ -88,6 +88,13 @@ to a puppet the editor now automatically creates an `ebayTitle` entry in the
 Variables panel if one is not already present. Set your OpenAI API key in the
 `OPENAI_API_KEY` environment variable before running this step.
 
+The **ebayPrice** step sends the current `ebayTitle` value to the GPT‑4o-search-preview
+model and asks for a suggested eBay price. The prompt instructs the model to end
+its reply with a line formatted as `Ebay Suggested Price: $xx.xx` and to never
+suggest less than $10. The extracted dollar amount is stored in the `ebayPrice`
+variable. Adding this step automatically creates an `ebayPrice` entry in the
+Variables panel if needed.
+
 The **ebayUploadImage** step uploads one or more images to the currently open eBay
 listing page. Provide a comma‑separated list of file paths and optionally an item
 ID. The step pulls the EPS endpoint and CSRF token from the page, fetches a fresh
