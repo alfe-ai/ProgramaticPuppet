@@ -159,7 +159,11 @@ async function runSteps(opts, logger = console.log) {
           }
         }
       } else if (type === 'clickText') {
-        await clickText(step.text);
+        try {
+          await clickText(step.text);
+        } catch (err) {
+          logger(`[ProgramaticPuppet] clickText failed: ${err}`);
+        }
       } else if (type === 'clickTextCheckbox') {
         await clickTextCheckbox(step.text);
       } else if (type === 'clickName') {
