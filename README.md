@@ -33,7 +33,9 @@ the selector field was mistakenly used to hold the text value.
 Click steps also accept an optional second field specifying which step number to jump to when the element cannot be clicked. This allows basic fallback logic when selectors fail.
 
 The **clickText** step searches the current page for an element whose text
-contains the provided value and clicks it.
+contains the provided value and clicks it. If no match is found before the
+timeout elapses, the step logs the failure and the script continues to the next
+step rather than aborting.
 
 The **clickName** step clicks the first element with the given `name`
 attribute. Specify just the attribute value, for example `clear` will click the
