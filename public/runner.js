@@ -121,20 +121,37 @@ async function runItem(item) {
     });
     const reader = res.body.getReader();
     const dec = new TextDecoder();
+    let buffer = '';
     while (true) {
       const { value, done } = await reader.read();
-      if (done) break;
-      const chunk = dec.decode(value);
-      chunk.split(/\n\n/).forEach(line => {
-        if (line.startsWith('data:')) {
-          const data = line.slice(5).trim();
-          if (data === 'done') {
-            log(`Finished ${item.puppetName}`);
-          } else {
-            log(data);
+      if (value) {
+        buffer += dec.decode(value, { stream: true });
+        let idx;
+        while ((idx = buffer.indexOf('\n\n')) !== -1) {
+          const line = buffer.slice(0, idx);
+          buffer = buffer.slice(idx + 2);
+          if (line.startsWith('data:')) {
+            const data = line.slice(5).trim();
+            if (data === 'done') {
+              log(`Finished ${item.puppetName}`);
+            } else {
+              log(data);
+            }
           }
         }
-      });
+      }
+      if (done) break;
+    }
+    if (buffer) {
+      const line = buffer.trim();
+      if (line.startsWith('data:')) {
+        const data = line.slice(5).trim();
+        if (data === 'done') {
+          log(`Finished ${item.puppetName}`);
+        } else {
+          log(data);
+        }
+      }
     }
   } catch (err) {
     log(`Error: ${err}`);
