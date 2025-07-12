@@ -92,7 +92,8 @@ The **ebayPrice** step sends the current `ebayTitle` value to the GPT‑4o-searc
 model and asks for a suggested eBay price. The prompt instructs the model to end
 its reply with a line formatted as `Ebay Suggested Price: $xx.xx` and to never
 suggest less than $10. The extracted dollar amount is stored in the `ebayPrice`
-variable. Adding this step automatically creates an `ebayPrice` entry in the
+variable. The full response text is logged and saved in `ebayPriceFull` for
+reference. Adding this step automatically creates an `ebayPrice` entry in the
 Variables panel if needed.
 
 The **ebayUploadImage** step uploads one or more images to the currently open eBay
