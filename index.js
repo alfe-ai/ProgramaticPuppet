@@ -279,9 +279,11 @@ async function runSteps(opts, logger = console.log) {
             });
             const json = await res.json();
             const content = json.choices?.[0]?.message?.content?.trim() || '';
+            logger(`[ProgramaticPuppet] ebayPrice raw response: ${content}`);
             const match = content.match(/Ebay Suggested Price: \$(\d+(?:\.\d{1,2})?)/i);
             const price = match ? match[1] : content;
             variables.ebayPrice = price;
+            variables.ebayPriceFull = content;
             logger(`[ProgramaticPuppet] ebayPrice: ${price}`);
           } catch (err) {
             logger(`[ProgramaticPuppet] ebayPrice error: ${err}`);
