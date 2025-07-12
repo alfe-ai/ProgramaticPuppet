@@ -20,6 +20,9 @@ Sample self-signed certificates `server.key` and `server.cert` are included for
 local HTTPS development.
 
 Open [https://localhost:3005](https://localhost:3005) in your browser and build a small script.  Press **Run Steps** to execute the flow with PuppetCore.
+You can also manage stored puppets using the runner page at
+[https://localhost:3005/runner.html](https://localhost:3005/runner.html).
+It allows queuing multiple puppets and passing in custom variables before each run.
 
 For **click** and **type** steps, provide a CSS selector for the target element.
 Type steps insert each character with a 0.5 s delay to better mimic human input.

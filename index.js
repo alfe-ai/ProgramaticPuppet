@@ -490,6 +490,9 @@ const PORT = process.env.PORT || 3005;
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.get('/runner', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'runner.html'));
+});
 
 app.post('/run', async (req, res) => {
   let steps = [];

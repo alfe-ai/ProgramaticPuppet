@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ProgramaticPuppet Runner</title>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: auto; }
+    #varsList div { margin-bottom: 4px; }
+    #queueList { margin-top: 8px; }
+    pre { white-space: pre-wrap; background:#f0f0f0; padding:8px; height:200px; overflow:auto; }
+  </style>
+</head>
+<body>
+<h1>ProgramaticPuppet Runner</h1>
+<div>
+  <label>Puppet:
+    <select id="puppetSelect"></select>
+  </label>
+</div>
+<div style="margin-top:8px;">
+  <input type="text" id="productURL" placeholder="Printify Product URL" style="width:100%;"/>
+</div>
+<div style="margin-top:8px;">
+  <label>Loops: <input type="number" id="loops" value="1" min="1" style="width:60px;"/></label>
+</div>
+<div id="varsPanel" style="margin-top:8px;">
+  <strong>Variables</strong>
+  <div id="varsList"></div>
+  <button onclick="addVar()">Add Variable</button>
+</div>
+<div style="margin-top:8px;">
+  <button onclick="runNow()">Run Now</button>
+  <button onclick="addToQueue()">Add To Queue</button>
+  <button onclick="startQueue()">Start Queue</button>
+</div>
+<h2>Queue</h2>
+<ul id="queueList"></ul>
+<h2>Logs</h2>
+<pre id="log"></pre>
+<script src="runner.js"></script>
+</body>
+</html>
