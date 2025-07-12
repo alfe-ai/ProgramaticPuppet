@@ -12,6 +12,7 @@ const stepTypes = [
   'clickText',
   'clickTextCheckbox',
   'clickName',
+  'clickAriaLabel',
   'clickNth',
   'clickNthName',
   'setDescription',
@@ -313,6 +314,8 @@ function addFields(div, step = {}) {
       input.placeholder = 'section title';
     } else if (step.type === 'clickName') {
       input.placeholder = 'element name';
+    } else if (step.type === 'clickAriaLabel') {
+      input.placeholder = 'aria-label';
     } else if (step.type === 'clickTextCheckbox') {
       input.placeholder = 'checkbox text';
     } else {
@@ -327,6 +330,8 @@ function addFields(div, step = {}) {
       input.value = step.text;
     } else if (step.type === 'clickName' && step.name) {
       input.value = step.name;
+    } else if (step.type === 'clickAriaLabel' && step.label) {
+      input.value = step.label;
     } else if (step.seconds) input.value = step.seconds;
     else if (step.message) input.value = step.message;
     else if (step.path) input.value = step.path;
@@ -445,6 +450,7 @@ function collectSteps() {
       else if (type === 'clickText') result.push({ type, text: val });
       else if (type === 'clickTextCheckbox') result.push({ type, text: val });
       else if (type === 'clickName') result.push({ type, name: val });
+      else if (type === 'clickAriaLabel') result.push({ type, label: val });
       else if (type === 'type') result.push({ type, selector: val.split('|')[0], text: val.split('|')[1] || '' });
       else if (type === 'wait') result.push({ type, seconds: val });
       else if (type === 'log') result.push({ type, message: val });
