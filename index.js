@@ -219,7 +219,8 @@ async function runSteps(opts, logger = console.log) {
           await sleep_helper(0.1);
         }
       } else if (type === 'ebayListingTitle') {
-        const imagePath = step.image;
+        const imagePath =
+          (step.imageVar && variables[step.imageVar]) || step.image;
         if (!process.env.OPENAI_API_KEY) {
           logger('[ProgramaticPuppet] OPENAI_API_KEY not set');
         } else if (imagePath && fs.existsSync(imagePath)) {
@@ -379,7 +380,9 @@ async function runSteps(opts, logger = console.log) {
           logger(`[ProgramaticPuppet] Uploaded ${img}: ${JSON.stringify(data)}`);
         }
       } else if (type === 'uiUploadFile') {
-        const imagePaths = String(step.paths || '')
+        const rawPaths =
+          (step.pathsVar && variables[step.pathsVar]) || step.paths || '';
+        const imagePaths = String(rawPaths)
           .split(',')
           .map(s => s.trim())
           .filter(Boolean);

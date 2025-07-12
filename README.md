@@ -91,11 +91,12 @@ The **keyPress** step presses the provided keyboard key. Key names are case-inse
   followed by a 0.1 second pause.
 
 The **ebayListingTitle** step sends an image to the GPT‑4o‑mini vision API to
-generate an eBay listing title. Provide the local file path to the image. The
-resulting title is stored in the `ebayTitle` variable. When this step is added
-to a puppet the editor now automatically creates an `ebayTitle` entry in the
-Variables panel if one is not already present. Set your OpenAI API key in the
-`OPENAI_API_KEY` environment variable before running this step.
+generate an eBay listing title. Provide the local file path to the image or the
+name of a variable that contains the path. The resulting title is stored in the
+`ebayTitle` variable. When this step is added to a puppet the editor now
+automatically creates an `ebayTitle` entry in the Variables panel if one is not
+already present. Set your OpenAI API key in the `OPENAI_API_KEY` environment
+variable before running this step.
 
 The **ebayPrice** step sends the current `ebayTitle` value to the GPT‑4o-search-preview
 model and asks for a suggested eBay price. The prompt instructs the model to end
@@ -113,10 +114,11 @@ variables are not present the code now scans other globals on the page looking f
 the required data, making it more resilient to eBay layout changes.
 
 The **uiUploadFile** step interacts with a standard file input on the current
-page. Provide a comma-separated list of file paths and optionally a CSS selector
-for the input element. When no selector is given the first `input[type="file"]`
-is used. This lets you trigger uploads purely through the website's UI without
-relying on eBay's internal EPS variables.
+page. Provide a comma-separated list of file paths or the name of a variable
+holding the paths and optionally a CSS selector for the input element. When no
+selector is given the first `input[type="file"]` is used. This lets you trigger
+uploads purely through the website's UI without relying on eBay's internal EPS
+variables.
 
 The **end** step stops execution of the current puppet instance immediately,
 skipping any remaining steps. When loops are enabled, later iterations will

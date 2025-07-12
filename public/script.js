@@ -257,6 +257,13 @@ function addFields(div, step = {}) {
     imgInput.className = 'ebay-title-image';
     if (step.image) imgInput.value = step.image;
     div.appendChild(imgInput);
+
+    const imgVarInput = document.createElement('input');
+    imgVarInput.placeholder = 'image var';
+    imgVarInput.className = 'ebay-title-image-var';
+    if (step.imageVar) imgVarInput.value = step.imageVar;
+    imgVarInput.style.marginLeft = '4px';
+    div.appendChild(imgVarInput);
     ensureEbayTitleVariable();
   } else if (step.type === 'ebayPrice') {
     ensureEbayTitleVariable();
@@ -280,6 +287,13 @@ function addFields(div, step = {}) {
     pathsInput.className = 'file-paths';
     if (step.paths) pathsInput.value = step.paths;
     div.appendChild(pathsInput);
+
+    const pathsVarInput = document.createElement('input');
+    pathsVarInput.placeholder = 'paths var';
+    pathsVarInput.className = 'file-paths-var';
+    if (step.pathsVar) pathsVarInput.value = step.pathsVar;
+    pathsVarInput.style.marginLeft = '4px';
+    div.appendChild(pathsVarInput);
 
     const selInput = document.createElement('input');
     selInput.placeholder = 'input selector';
@@ -426,7 +440,8 @@ function collectSteps() {
     result.push({ type, times: count });
   } else if (type === 'ebayListingTitle') {
     const image = div.querySelector('.ebay-title-image')?.value || '';
-    result.push({ type, image });
+    const imageVar = div.querySelector('.ebay-title-image-var')?.value || '';
+    result.push({ type, image, imageVar });
   } else if (type === 'ebayPrice') {
     result.push({ type });
   } else if (type === 'ebayUploadImage') {
@@ -435,8 +450,9 @@ function collectSteps() {
     result.push({ type, paths, itemId });
   } else if (type === 'uiUploadFile') {
     const paths = div.querySelector('.file-paths')?.value || '';
+    const pathsVar = div.querySelector('.file-paths-var')?.value || '';
     const selector = div.querySelector('.file-selector')?.value || '';
-    result.push({ type, paths, selector });
+    result.push({ type, paths, pathsVar, selector });
   } else if (type === 'setVariable') {
     const name = div.querySelector('.set-var-name')?.value || '';
     const value = div.querySelector('.set-var-value')?.value || '';
