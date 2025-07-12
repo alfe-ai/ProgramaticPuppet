@@ -96,7 +96,8 @@ name of a variable that contains the path. The resulting title is stored in the
 `ebayTitle` variable. When this step is added to a puppet the editor now
 automatically creates an `ebayTitle` entry in the Variables panel if one is not
 already present. Set your OpenAI API key in the `OPENAI_API_KEY` environment
-variable before running this step.
+variable before running this step. Paths surrounded by single or double quotes
+are handled automatically, so quoting the value in the Variables panel is safe.
 
 The **ebayPrice** step sends the current `ebayTitle` value to the GPT‑4o-search-preview
 model and asks for a suggested eBay price. The prompt instructs the model to end

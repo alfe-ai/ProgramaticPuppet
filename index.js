@@ -219,8 +219,11 @@ async function runSteps(opts, logger = console.log) {
           await sleep_helper(0.1);
         }
       } else if (type === 'ebayListingTitle') {
-        const imagePath =
+        const rawImagePath =
           (step.imageVar && variables[step.imageVar]) || step.image;
+        const imagePath = String(rawImagePath)
+          .trim()
+          .replace(/^['"]+|['"]+$/g, '');
         if (!process.env.OPENAI_API_KEY) {
           logger('[ProgramaticPuppet] OPENAI_API_KEY not set');
         } else if (imagePath && fs.existsSync(imagePath)) {
@@ -305,7 +308,7 @@ async function runSteps(opts, logger = console.log) {
       } else if (type === 'ebayUploadImage') {
         const imagePaths = String(step.paths || '')
           .split(',')
-          .map(s => s.trim())
+          .map(s => s.trim().replace(/^['"]+|['"]+$/g, ''))
           .filter(Boolean);
         const itemId = step.itemId || '';
         const { epsData, csrfMap } = await page.evaluate(() => {
@@ -384,7 +387,7 @@ async function runSteps(opts, logger = console.log) {
           (step.pathsVar && variables[step.pathsVar]) || step.paths || '';
         const imagePaths = String(rawPaths)
           .split(',')
-          .map(s => s.trim())
+          .map(s => s.trim().replace(/^['"]+|['"]+$/g, ''))
           .filter(Boolean);
         const selector = step.selector || 'input[type="file"]';
         if (typeof page.setInputFiles === 'function') {
