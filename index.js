@@ -520,8 +520,12 @@ app.post('/run', async (req, res) => {
 });
 
 app.get('/getPuppets', (req, res) => {
+  const exportFile = path.join(__dirname, 'export.json');
+  if (!fs.existsSync(exportFile)) {
+    return res.json([]);
+  }
   try {
-    const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'export.json'), 'utf8'));
+    const data = JSON.parse(fs.readFileSync(exportFile, 'utf8'));
     res.json(Object.keys(data));
   } catch (err) {
     res.status(500).json({ error: String(err) });
@@ -536,8 +540,12 @@ app.post('/runPuppet', async (req, res) => {
   let printifyProductURL = req.body.printifyProductURL || '';
   let loopsOverride = req.body.loops;
   let variablesOverride = req.body.variables || {};
+  const exportFile = path.join(__dirname, 'export.json');
+  if (!fs.existsSync(exportFile)) {
+    return res.status(404).json({ error: 'puppet not found' });
+  }
   try {
-    const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'export.json'), 'utf8'));
+    const data = JSON.parse(fs.readFileSync(exportFile, 'utf8'));
     const puppet = data[puppetName];
     if (!puppet) {
       return res.status(404).json({ error: 'puppet not found' });
