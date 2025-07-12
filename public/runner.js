@@ -37,11 +37,34 @@ function collectVars() {
   return vars;
 }
 
+function varsToString(vars = {}) {
+  return Object.entries(vars)
+    .map(([k, v]) => `${k}=${v}`)
+    .join(', ');
+}
+
+function loadVars(vars = {}) {
+  varsList.innerHTML = '';
+  Object.entries(vars).forEach(([k, v]) => addVar(k, v));
+}
+
+function setUIFromItem(item) {
+  puppetSelect.value = item.puppetName;
+  productURLInput.value = item.printifyProductURL || '';
+  loopsInput.value = item.loops || 1;
+  loadVars(item.variables || {});
+}
+
 function updateQueueUI() {
   queueList.innerHTML = '';
   queue.forEach((item, idx) => {
     const li = document.createElement('li');
-    li.textContent = `${idx + 1}. ${item.puppetName} (${item.state || 'queued'})`;
+    let text = `${idx + 1}. ${item.puppetName} (${item.state || 'queued'})`;
+    const varsText = varsToString(item.variables);
+    if (varsText) text += ` [${varsText}]`;
+    li.textContent = text;
+    li.style.cursor = 'pointer';
+    li.onclick = () => setUIFromItem(item);
     queueList.appendChild(li);
   });
 }
@@ -130,6 +153,7 @@ async function startQueue() {
       continue;
     }
     item.state = 'running';
+    setUIFromItem(item);
     updateQueueUI();
     await runItem(item);
     item.state = cancelQueue ? 'stopped' : 'finished';
