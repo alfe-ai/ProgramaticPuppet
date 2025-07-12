@@ -173,6 +173,18 @@ async function runSteps(opts, logger = console.log) {
         await clickNth(selector, Number(step.index) || 1);
       } else if (type === 'clickNthName') {
         await clickNthName(step.name, Number(step.index) || 1);
+      } else if (type === 'clickAriaLabel') {
+        const selector = `[aria-label="${step.label}"]`;
+        try {
+          await page.click(selector);
+        } catch (err) {
+          const el = await page.$(selector);
+          if (el) {
+            await page.evaluate(e => e.click(), el);
+          } else {
+            throw err;
+          }
+        }
       } else if (type === 'mouseClickCoordinates') {
         const x = Number(step.x) || 0;
         const y = Number(step.y) || 0;
