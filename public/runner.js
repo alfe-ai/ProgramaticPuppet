@@ -48,12 +48,17 @@ async function loadPuppets() {
   try {
     const res = await fetch('/getPuppets');
     const names = await res.json();
-    names.forEach(n => {
-      const opt = document.createElement('option');
-      opt.value = n;
-      opt.textContent = n;
-      puppetSelect.appendChild(opt);
-    });
+    if (Array.isArray(names)) {
+      names.forEach(n => {
+        const opt = document.createElement('option');
+        opt.value = n;
+        opt.textContent = n;
+        puppetSelect.appendChild(opt);
+      });
+    } else {
+      const msg = names && names.error ? names.error : 'Invalid response';
+      throw new Error(msg);
+    }
   } catch (err) {
     log(`Error fetching puppets: ${err}`);
   }
