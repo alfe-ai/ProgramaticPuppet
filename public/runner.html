@@ -32,6 +32,10 @@
   <button onclick="runNow()">Run Now</button>
   <button onclick="addToQueue()">Add To Queue</button>
   <button onclick="startQueue()">Start Queue</button>
+  <button onclick="stopQueue()">Stop Queue</button>
+  <button onclick="exportQueue()">Export Queue</button>
+  <button onclick="document.getElementById('importFile').click()">Import Queue</button>
+  <input type="file" id="importFile" style="display:none" accept="application/json"/>
 </div>
 <h2>Queue</h2>
 <ul id="queueList"></ul>

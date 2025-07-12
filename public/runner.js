@@ -4,9 +4,11 @@ const logPre = document.getElementById('log');
 const varsList = document.getElementById('varsList');
 const productURLInput = document.getElementById('productURL');
 const loopsInput = document.getElementById('loops');
+const importFileInput = document.getElementById('importFile');
 
 let queue = [];
 let running = false;
+let cancelQueue = false;
 
 function addVar(name = '', value = '') {
   const row = document.createElement('div');
@@ -39,7 +41,7 @@ function updateQueueUI() {
   queueList.innerHTML = '';
   queue.forEach((item, idx) => {
     const li = document.createElement('li');
-    li.textContent = `${idx + 1}. ${item.puppetName}`;
+    li.textContent = `${idx + 1}. ${item.puppetName} (${item.state || 'queued'})`;
     queueList.appendChild(li);
   });
 }
@@ -70,6 +72,7 @@ function addToQueue() {
     printifyProductURL: productURLInput.value,
     loops: Number(loopsInput.value) || 1,
     variables: collectVars(),
+    state: 'queued',
   };
   queue.push(item);
   updateQueueUI();
@@ -118,13 +121,63 @@ async function runItem(item) {
 async function startQueue() {
   if (running) return;
   running = true;
-  while (queue.length) {
-    const item = queue.shift();
+  cancelQueue = false;
+  for (const item of queue) {
+    if (item.state !== 'queued') continue;
+    if (cancelQueue) {
+      item.state = 'stopped';
+      updateQueueUI();
+      continue;
+    }
+    item.state = 'running';
     updateQueueUI();
     await runItem(item);
+    item.state = cancelQueue ? 'stopped' : 'finished';
+    updateQueueUI();
+    if (cancelQueue) break;
   }
   running = false;
 }
+
+function stopQueue() {
+  if (!running) return;
+  cancelQueue = true;
+}
+
+function exportQueue() {
+  const data = queue.map(({ puppetName, printifyProductURL, loops, variables }) => ({
+    puppetName,
+    printifyProductURL,
+    loops,
+    variables,
+  }));
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'queue.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+importFileInput?.addEventListener('change', ev => {
+  const file = ev.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const items = JSON.parse(e.target.result);
+      if (Array.isArray(items)) {
+        queue = items.map(it => ({ ...it, state: 'queued' }));
+        updateQueueUI();
+      }
+    } catch (err) {
+      log(`Error importing queue: ${err}`);
+    }
+  };
+  reader.readAsText(file);
+  ev.target.value = '';
+});
 
 function log(msg) {
   logPre.textContent += msg + '\n';

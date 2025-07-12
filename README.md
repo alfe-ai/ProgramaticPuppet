@@ -23,6 +23,8 @@ Open [https://localhost:3005](https://localhost:3005) in your browser and build 
 You can also manage stored puppets using the runner page at
 [https://localhost:3005/runner.html](https://localhost:3005/runner.html).
 It allows queuing multiple puppets and passing in custom variables before each run.
+The queue can be exported to or imported from a JSON file and the page shows the
+current state of each job as it runs.
 
 For **click** and **type** steps, provide a CSS selector for the target element.
 Type steps insert each character with a 0.5 s delay to better mimic human input.
