@@ -122,7 +122,11 @@ async function runSteps(opts, logger = console.log) {
           step[k] = v;
         }
       }
-      logger(`[ProgramaticPuppet] Executing step ${i + 1}/${steps.length}:`, step);
+      logger(
+        `[ProgramaticPuppet] Executing step ${i + 1}/${steps.length}: ${JSON.stringify(
+          step,
+        )}`,
+      );
       const type = step.type;
       let jumped = false;
       if (type === 'loadURL') {
