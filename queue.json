@@ -3,392 +3,288 @@
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Wormwood 4oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Wormwood 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Women's balancing tea 2.5oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Spearmint leaf 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Wise Woman tea 2.5oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Skullcap 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Valerian root 100 capsules.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Reishi 1oz liquid.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Valerian .5oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Pink rose petals 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Valerian 2oz liquid.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Peppermint leaf 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Throat chakra roll on 10ml.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Mullein .5oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Third eye chakra roll on 10ml.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Mugwort .5oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Spearmint leaf 4oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Moon Valley Organics 3 asst lip balms.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Solar plexus chakra roll on 10ml.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Mexican oregano leaf 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Skullcap 4oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Marshmallow leaf 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Skullcap 1oz liquid.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Love tea 2.5oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Shiitake mushrooms whole 4oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Love care 1oz liquid.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Sassafras leaf 4oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Lemongrass 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Rosemary leaf whole 4oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Lemon balm roll on 10ml.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Rosemary leaf whole 4oz (2).jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Lemon balm 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Rose buds and petals 16oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Kava kava 1oz liquid.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Root chakra roll on 10ml.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Jasmine roll on 10ml.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Resin 5 essential oil kit.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Hyssop 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Relax care 1oz liquid.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Hops 1oz liquid.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Reishi 1oz liquid.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Home Harmony 5 essential oil kit.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Red clover herb 4oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Hibiscus flower whole 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Raspberry leaf 4oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Hibiscus flower cut 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Pit Stop Tea Tree and Lavendar roll on deodorant.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Heart chakra roll on 10ml.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Pink rose petals 4oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Four Elements Relax body oil 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Peppermint leaf 4oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Four Elements Meditate body oil 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Passionflower 2oz liquid.jpg'" }
+    "variables": {
+  "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Female care 1oz liquid.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Passionflower 1lb.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/English lavendar whole flower 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Navel chakra roll on 10ml.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Damiana leaf sifted 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Mullein leaf 4oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Damiana leaf 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Mullein .5oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Damiana 1oz liquid.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Mugwort .5oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Crown chakra roll on 10ml.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Mugwort 4oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Cordyceps mushroom powder 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Motherwort 4oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Coltsfoot 4oz.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Moon Valley Organics 3 asst lip balms.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Classic 5 essential oil kit.jpg'"
+    }
   },
   {
     "puppetName": "ebayLocalListing",
     "printifyProductURL": "",
     "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Mood care 1oz liquid.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Mexican oregano leaf 4oz.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Marshmallow leaf 4oz.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Love tea 2.5oz.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Love care 1oz liquid.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Lemongrass 4oz.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Lemon balm roll on 10ml.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Lemon balm 4oz.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Lavendar roll on 10ml.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Lavandin 16oz liquid.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Kava kava 1oz liquid.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Jasmine roll on 10ml.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Hyssop 4oz.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Hops 1oz liquid.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Home Harmony 5 essential oil kit.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Hibiscus flower whole 4oz.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Hibiscus flower cut 4oz.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Heart chakra roll on 10ml.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Four Elements Relax body oil 4oz.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Four Elements Meditate body oil 4oz.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Female care 1oz liquid.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/English lavendar whole flower 4oz.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Damiana leaf sifted 4oz.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Damiana leaf 4oz.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Damiana 1oz liquid.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Crown chakra roll on 10ml.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Cordyceps mushroom powder 4oz.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Coltsfoot 4oz.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Classic 5 essential oil kit.jpg'" }
-  },
-  {
-    "puppetName": "ebayLocalListing",
-    "printifyProductURL": "",
-    "loops": 1,
-    "variables": { "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Chamomile flower .5oz.jpg'" }
+    "variables": {
+      "imgPath": "'/home/syl/Downloads/OneDrive_77_7-5-2025/Chamomile flower .5oz.jpg'"
+    }
   }
 ]
-
-
