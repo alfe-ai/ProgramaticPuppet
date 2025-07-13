@@ -262,9 +262,10 @@ async function runSteps(opts, logger = console.log) {
               body: JSON.stringify(payload),
             });
             const json = await res.json();
-            const title = json.choices?.[0]?.message?.content?.trim() || '';
-            variables.ebayTitle = title;
-            logger(`[ProgramaticPuppet] ebayTitle: ${title}`);
+            const rawTitle = json.choices?.[0]?.message?.content?.trim() || '';
+            const cleanedTitle = rawTitle.replace(/\*/g, '').slice(0, 80).trim();
+            variables.ebayTitle = cleanedTitle;
+            logger(`[ProgramaticPuppet] ebayTitle: ${cleanedTitle}`);
           } catch (err) {
             logger(`[ProgramaticPuppet] ebayListingTitle error: ${err}`);
           }
