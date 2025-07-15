@@ -201,6 +201,15 @@ async function runSteps(opts, logger = console.log) {
             throw err;
           }
         }
+      } else if (type === 'scrollToDataTestID') {
+        const selector = `[data-testid="${step.testId}"]`;
+        await page.evaluate(sel => {
+          const el = document.querySelector(sel);
+          if (el) {
+            el.scrollIntoView({ block: 'center' });
+          }
+        }, selector);
+        await sleep_helper(1);
       } else if (type === 'mouseClickCoordinates') {
         const x = Number(step.x) || 0;
         const y = Number(step.y) || 0;

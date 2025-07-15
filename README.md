@@ -84,6 +84,8 @@ lazy loading or reach elements near the bottom.
 
 The **scroll** step scrolls the page down by the specified number of pixels. Enter the amount to scroll in the field next to the step.
 
+The **scrollToDataTestID** step scrolls the page until the element with the given `data-testid` attribute is brought into view. Provide the attribute value such as `signupBtn` and the page will scroll so `[data-testid="signupBtn"]` is centered on the screen.
+
 The **mouseClickCoordinates** step clicks at the specified X and Y coordinates on the page.
 
 The **selectAllText** step simulates pressing Ctrl+A to select all text inside the

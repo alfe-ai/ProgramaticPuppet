@@ -26,6 +26,7 @@ const stepTypes = [
   'screenshot',
   'scroll',
   'scrollBottom',
+  'scrollToDataTestID',
   'mouseClickCoordinates',
   'selectAllText',
   'keyPress',
@@ -342,6 +343,8 @@ function addFields(div, step = {}) {
       input.placeholder = 'aria-label';
     } else if (step.type === 'clickDataTestID') {
       input.placeholder = 'data-testid';
+    } else if (step.type === 'scrollToDataTestID') {
+      input.placeholder = 'data-testid';
     } else if (step.type === 'clickTextCheckbox') {
       input.placeholder = 'checkbox text';
     } else if (step.type === 'scroll') {
@@ -361,6 +364,8 @@ function addFields(div, step = {}) {
     } else if (step.type === 'clickAriaLabel' && step.label) {
       input.value = step.label;
     } else if (step.type === 'clickDataTestID' && step.testId) {
+      input.value = step.testId;
+    } else if (step.type === 'scrollToDataTestID' && step.testId) {
       input.value = step.testId;
     } else if (step.type === 'scroll' && step.pixels !== undefined) {
       input.value = step.pixels;
@@ -495,6 +500,7 @@ function collectSteps() {
       else if (type === 'sectionTitle') result.push({ type, title: val });
       else if (type === 'screenshot') result.push({ type, path: val });
       else if (type === 'scroll') result.push({ type, pixels: Number(val) || 0 });
+      else if (type === 'scrollToDataTestID') result.push({ type, testId: val });
       else if (type === 'scrollBottom' || type === 'end' || type === 'selectAllText' || type === 'loadPrintifyProductURL') result.push({ type });
     }
   });
