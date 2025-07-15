@@ -474,6 +474,12 @@ async function runSteps(opts, logger = console.log) {
       } else if (type === 'screenshot') {
         const filePath = step.path || `screenshot-${Date.now()}.png`;
         await page.screenshot({ path: filePath, fullPage: true });
+      } else if (type === 'scroll') {
+        const pixels = Number(step.pixels) || 0;
+        await page.evaluate(y => {
+          window.scrollBy(0, y);
+        }, pixels);
+        await sleep_helper(1);
       } else if (type === 'scrollBottom') {
         await page.evaluate(() => {
           window.scrollTo(0, document.body.scrollHeight);

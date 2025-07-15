@@ -24,6 +24,7 @@ const stepTypes = [
   'sectionTitle',
   'checkPageUrl',
   'screenshot',
+  'scroll',
   'scrollBottom',
   'mouseClickCoordinates',
   'selectAllText',
@@ -232,6 +233,14 @@ function addFields(div, step = {}) {
     if (step.y !== undefined) yInput.value = step.y;
     yInput.style.width = '60px';
     div.appendChild(yInput);
+  } else if (step.type === 'scroll') {
+    const pxInput = document.createElement('input');
+    pxInput.placeholder = 'pixels';
+    pxInput.className = 'scroll-pixels';
+    pxInput.type = 'number';
+    if (step.pixels !== undefined) pxInput.value = step.pixels;
+    pxInput.style.width = '80px';
+    div.appendChild(pxInput);
   } else if (step.type === 'setDescription') {
     const selectorInput = document.createElement('input');
     selectorInput.placeholder = 'CSS selector';
@@ -335,6 +344,8 @@ function addFields(div, step = {}) {
       input.placeholder = 'data-testid';
     } else if (step.type === 'clickTextCheckbox') {
       input.placeholder = 'checkbox text';
+    } else if (step.type === 'scroll') {
+      input.placeholder = 'pixels';
     } else {
       input.placeholder = 'value (CSS selector for click/type, text for clickText/clickTextCheckbox, screenshot path)';
     }
@@ -351,6 +362,8 @@ function addFields(div, step = {}) {
       input.value = step.label;
     } else if (step.type === 'clickDataTestID' && step.testId) {
       input.value = step.testId;
+    } else if (step.type === 'scroll' && step.pixels !== undefined) {
+      input.value = step.pixels;
     } else if (step.seconds) input.value = step.seconds;
     else if (step.message) input.value = step.message;
     else if (step.path) input.value = step.path;
@@ -416,6 +429,9 @@ function collectSteps() {
     const x = Number(div.querySelector('.mouse-x')?.value || 0);
     const y = Number(div.querySelector('.mouse-y')?.value || 0);
     result.push({ type, x, y });
+  } else if (type === 'scroll') {
+    const pixels = Number(div.querySelector('.scroll-pixels')?.value || 0);
+    result.push({ type, pixels });
   } else if (type === 'setDescription') {
     const sel = div.querySelector('.set-desc-selector')?.value || '';
     result.push({ type, selector: sel });
@@ -478,6 +494,7 @@ function collectSteps() {
       else if (type === 'log') result.push({ type, message: val });
       else if (type === 'sectionTitle') result.push({ type, title: val });
       else if (type === 'screenshot') result.push({ type, path: val });
+      else if (type === 'scroll') result.push({ type, pixels: Number(val) || 0 });
       else if (type === 'scrollBottom' || type === 'end' || type === 'selectAllText' || type === 'loadPrintifyProductURL') result.push({ type });
     }
   });

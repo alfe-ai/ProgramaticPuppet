@@ -2,7 +2,7 @@
 
 ProgramaticPuppet is an experimental WYSIWYG interface for creating and running [PuppetCore](https://github.com/alfe-ai/PuppetCore) automations without writing code.
 
-It starts a small Express web server that serves a simple editor.  The editor lets you add numbered steps such as "Load URL", "Click", "ClickNth", "ClickText", "ClickTextCheckbox", "ClickName", "ClickAriaLabel", "ClickDataTestID", "Type", "TypeVar", "Wait", "Check Page Url", "Section Title", "Scroll Bottom", "MouseClickCoordinates" or "Screenshot".  You can then run the defined steps directly from the browser.
+It starts a small Express web server that serves a simple editor.  The editor lets you add numbered steps such as "Load URL", "Click", "ClickNth", "ClickText", "ClickTextCheckbox", "ClickName", "ClickAriaLabel", "ClickDataTestID", "Type", "TypeVar", "Wait", "Check Page Url", "Section Title", "Scroll", "Scroll Bottom", "MouseClickCoordinates" or "Screenshot".  You can then run the defined steps directly from the browser.
 
 This is only a minimal prototype, but it demonstrates how a no‑code interface can generate and execute puppet flows.
 
@@ -81,6 +81,8 @@ The **sectionTitle** step simply writes its text to the server console, letting 
 
 The **scrollBottom** step scrolls the page all the way down. Use it to trigger
 lazy loading or reach elements near the bottom.
+
+The **scroll** step scrolls the page down by the specified number of pixels. Enter the amount to scroll in the field next to the step.
 
 The **mouseClickCoordinates** step clicks at the specified X and Y coordinates on the page.
 
