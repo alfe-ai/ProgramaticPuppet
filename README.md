@@ -2,7 +2,7 @@
 
 ProgramaticPuppet is an experimental WYSIWYG interface for creating and running [PuppetCore](https://github.com/alfe-ai/PuppetCore) automations without writing code.
 
-It starts a small Express web server that serves a simple editor.  The editor lets you add numbered steps such as "Load URL", "Click", "ClickNth", "ClickText", "ClickTextCheckbox", "ClickName", "ClickAriaLabel", "Type", "TypeVar", "Wait", "Check Page Url", "Section Title", "Scroll Bottom", "MouseClickCoordinates" or "Screenshot".  You can then run the defined steps directly from the browser.
+It starts a small Express web server that serves a simple editor.  The editor lets you add numbered steps such as "Load URL", "Click", "ClickNth", "ClickText", "ClickTextCheckbox", "ClickName", "ClickAriaLabel", "ClickDataTestID", "Type", "TypeVar", "Wait", "Check Page Url", "Section Title", "Scroll Bottom", "MouseClickCoordinates" or "Screenshot".  You can then run the defined steps directly from the browser.
 
 This is only a minimal prototype, but it demonstrates how a no‑code interface can generate and execute puppet flows.
 
@@ -68,6 +68,7 @@ attribute. Provide just the attribute value, for example `Search` will click the
 element matching `[aria-label="Search"]`. If the regular Puppeteer `click()`
 fails because the node isn't deemed clickable, a fallback DOM `element.click()`
 is attempted.
+The **clickDataTestID** step clicks the first element with the given `data-testid` attribute. Provide just the attribute value, for example `searchBtn` will click the element matching `[data-testid="searchBtn"]`. If the regular Puppeteer `click()` fails because the node isn't deemed clickable, a fallback DOM `element.click()` is attempted.
 
 The **checkPageUrl** step compares the current page URL with the value provided
 in the first field. Use the second field to specify which step number to jump
