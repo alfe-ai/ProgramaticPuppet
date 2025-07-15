@@ -189,6 +189,18 @@ async function runSteps(opts, logger = console.log) {
             throw err;
           }
         }
+      } else if (type === 'clickDataTestID') {
+        const selector = `[data-testid="${step.testId}"]`;
+        try {
+          await page.click(selector);
+        } catch (err) {
+          const el = await page.$(selector);
+          if (el) {
+            await page.evaluate(e => e.click(), el);
+          } else {
+            throw err;
+          }
+        }
       } else if (type === 'mouseClickCoordinates') {
         const x = Number(step.x) || 0;
         const y = Number(step.y) || 0;
